@@ -2,3 +2,117 @@
 /* project: Campo Minato; */
 /* language: css; */
 
+
+/* reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* container */
+.container{
+    width: 95%;
+    margin: 0 auto;
+    height: 100px;
+}
+
+/* header */
+header{
+    height: 100px;
+}
+
+/* footer */
+footer{
+    height: 50px;
+    line-height: 50px;
+}
+
+/* main */
+main{
+    padding: 2rem 0;
+    width: 100%;
+    background-color: aquamarine;
+}
+
+/* select */
+select{
+    width: 150px;
+}
+
+/* row-formatting-section */
+.row{
+    display: flex;
+   
+}
+
+.row.js-beetween{
+    height: 100%;
+}
+
+.js-beetween{
+    justify-content: space-between;
+}
+
+.al-center{
+    align-items: center;
+}
+
+/* header */
+.header{
+margin-left: 0.4em;
+}
+
+/* game-btn */
+.game-btn{
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+}
+
+/* grid */
+.grid{
+    width: 700px;
+    height: 700px;
+    margin: 0 auto;
+    border: 1.3px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* boxes-formatting-section */
+/* box-1 */
+.box-1{
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+}
+
+/* box-2 */
+.box-2{
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+/* box-3 */
+.box-3{
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
+
+/* common-box */
+.common-box{
+    border: 1.3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    cursor: pointer;
+}
+
+/* color-aqua */
+.aqua{
+background-color: aqua;
+}
+
+/* color-aqua */
+.red{
+    background-color: red;
+}
