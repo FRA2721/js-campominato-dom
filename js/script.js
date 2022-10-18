@@ -2,5 +2,3 @@
 // project: Campo Minato;
 // language: javascript;
 
-// debug
-alert("red");
