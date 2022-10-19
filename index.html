@@ -1,6 +1,6 @@
-<!-- developer: Francesco Cimino; -->
-<!-- project: Campo Minato; -->
-<!-- language: html; -->
+<!-- dev: Francesco Cimino; -->
+<!-- proj: Campo Minato; -->
+<!-- lang: html; -->
 
 <!-- doctype -->
 <!DOCTYPE html>
@@ -9,87 +9,86 @@
 <!-- html -->
 <html lang="en">
 
-<!-- ----------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------- -->
 <!-- head -->
 <head>
 
     <!-- meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- /meta -->
 
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <!-- /css -->
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- /meta -->
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <!-- /bootstrap -->
+
     <!-- title -->
-    <title>Minefild</title>
+    <title>Minefield</title>
     <!-- /title -->
 
 </head>
 <!-- /head -->
 
-<!-- ----------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------- -->
 <!-- body -->
 <body>
-    
-    <!-- header -->
-    <header>
 
-        <!-- container -->
-        <div class="container">
-            <div class="row js-beetween al-center">
-                <div class="title">
+    <!-- container -->
+    <div class="container">
 
-                    <!-- logo-&-title -->
-                    <div class="row al-center">
-                        <img src="img/logo-game.png" alt="boolean logo">
-                        <h1 class="header">Minefild</h1>
-                    </div>
-                    <!-- /logo-&-title -->
+        <!-- header-container -->
+        <div class="header-container">
 
-                </div>
+            <img src="img/logo-game.png" alt="boolean logo">
+            <h1>Minefield</h1>
 
-                <div class="action-link">
-                    
-                    <label for="level">Select the difficulties:</label>
-                    <select name="levels" id="mode-selected" >
-                        <option value="difficulties-1-type">Hard</option>
-                        <option value="difficulties-2-type">Medium</option>
-                        <option value="difficulties-3-type">Easy</option>
-                    </select>
-                    
-                    <button class="game-btn" id="play-btn">Play now</button>
-                </div>
+            <div class="user">
+                <span>Difficulties:</span>
+
+                <select name="choice" id="difficulties">
+                    <option value="100 square-box">Easy</option>
+                    <option value="81 square-box">Medium</option>
+                    <option value="49 square-box">Hard</option>
+                </select>
+
+                <button id="play-now-btn">Play now!</button>
             </div>
         </div>
-        <!-- /container -->
+        <!-- /header-container -->
 
-    </header>
-    <!-- /header -->
+        <!-- main-container -->
+        <div class="main-container" id="main-container">
 
-    <!-- main -->
-    <main>
-        <div class="grid" id="grid-id"></div>
-    </main>
-    <!-- /main -->
+            <h2 id="main-title">Hello!!! Click the play now button to start the game...</h2>
 
-    <!-- footer -->
-    <footer>
-        <div class="container">
-            <p>Made width &hearts; by <a href="#">Francesco Cimino</a></p>
-        </div>    
-    </footer>
-    <!-- /footer -->
+            <div class="grid hidden"></div>
 
-    <!-- script -->
+            <h2 id="verdict" class="hidden"></h2>
+        </div>
+        <!-- /main-container -->
+
+        <!-- footer-container -->
+        <div class="footer-container mt-1">
+            <h3>Make with &hearts; by Francesco Cimino</h3>
+        </div>
+        <!-- /footer-container -->
+
+    </div>
+    <!-- /container -->
+
+    <!-- javascript -->
     <script src="js/script.js"></script>
-    <!-- /script -->
+    <!-- /javascript -->
 
 </body>
 <!-- /body -->
 
-<!-- ----------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------- -->
 </html>
 <!-- /html -->

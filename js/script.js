@@ -1,132 +1,133 @@
-// developer: Francesco Cimino;
-// project: Campo Minato;
-// language: javascript;
+// dev: Francesco Cimino;
+// proj: Campo Minato;
+// lang: js;
 
-const gridID = document.getElementById("grid-id");
+const playNowBtn = document.getElementById("play-now-btn");
+const verdict = document.getElementById("verdict");
 
-const modeSelected1 = document.getElementById("mode-selected");
-const playBtn = document.getElementById("play-btn");
+// empty-arrays
+let arrayNumbers = [];
+let arrayBombs = [];
+let userClick = [];
 
-playBtn.addEventListener("click", function(){
+// boolean-variable
+let end = false;
 
-gridID.innerHTML="";
+playNowBtn.addEventListener("click", generateGrid);
 
-let flag = true
-
-const num = modeSelected(modeSelected1.value);
-const bombArray = randomArray(num)
-const win = num - bombArray.length;
-const clickBox = [ ];
-const arrayLenght = modeSelected(modeSelected1.value);
-const arrayBox = createArray(arrayLenght);
-
-// loop
-for (let i = 0; i < arrayBox.length; i++){
-
-const nodeHtml = newHtmlElement(arrayBox[i], modeSelected.value);
-nodeHtml.addEventListener("click", function(){
-
-if (flag) {
-
-    if (bombArray.includes(parseInt(this.textContent))) {    
-    const squareList = document.getElementsByClassName("common-box");
-
-    for (let i = 0; i < squareList.length; i++){
-        const item = squareList[i];
+function generatorNumsArray(arrayLength) {
     
-        for (let j = 0; j < bombArray.length; j++){
-            if (parseInt(item.textContent) === bombArray[j])
-                item.classList.add("red");
-                }
-            }
-    flag = false;
+    let array = [];
+    
+    for(let i = 0; i < arrayLength; i++){
+        array.push(i + 1);
+    }
+    return array;
 }
 
-else if (clickBox.length < win){
+function randomNumbersArrayGenerator(arrayLength, maxRndNum) {
 
-    if (!clickBox.includes(this.textContent)){
-    this.classList.add("aqua");
-    clickBox.push((this.textContent));
-    }
-
-    if (clickBox.length === win){;
-        flag = false;
-    }
-    
-}
-
-}
-})
-
-gridID.append(nodeHtml);
-
-}
-} ) 
-
-
-function modeSelected(valueSelected){
-    let numElement = 0;
-
-        if (valueSelected === "difficulties-1-type")
-         numElement = 81;
-
-        else if (valueSelected === "difficulties-2-type")
-        numElement = 49;
-
-        else if (valueSelected ==="difficolta-3-type")
-        numElement = 100; 
-        
-        return numElement;
-    }
-
-function handleDivClick(){
-modeSelected
-} 
-
-function newHtmlElement(textElement, classBasis){
-    const element = document.createElement("div");
-    element.classList.add("common-box");
-    
-    let classStructure = "";
-
-    if (classBasis === "difficulties-1-type"){
-        classStructure = "box-1";
-    }
-    else if (classBasis === "difficulties-2-type")
-        classStructure="box-2";
-
-    else if (classBasis === "difficulties-3-type")
-        classStructure="box-3"
-    
-    element.classList.add(classStructure);
-    
-    
-    element.textContent = textElement;
-    return element;
-    }
-    
-    function createArray(arrayLength){
-    const arrayResult = [ ];
-    for (let i = 0; i < arrayLength; i++){
-        arrayResult.push(i + 1);
-    }
-    
-    return arrayResult;
-    }
-    
-    function generator (min, max) {
-        return Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
-      
-    function randomArray(maxNumber){
-    const result = [ ];
+    let array = [];
 
     // loop
-    while (result.length < 16){
-    const number=generator(1, maxNumber);
-    if (!result.includes(number))
-    result.push(number);
+    while( array.length < arrayLength){
+        const rndNum = getRndInteger(1, maxRndNum);
+        
+        if(!array.includes(rndNum)){
+            array.push(rndNum);
+        }
     }
 
-    return result;
+    return array;
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function boxGenerator(){
+    const boxGenerator = document.createElement("div");
+    boxGenerator.classList.add("box");
+
+    return boxGenerator;
+}
+
+function squareHandlerClick() {
+    const boxList = document.getElementsByClassName("box");
+
+    if(!(this.classList.value).includes("active") && !end){
+
+        if(!arrayBombs.includes(parseInt(this.textContent))) {
+            this.classList.add("active");
+            userClick.push(this.textContent);
+
+            if(userClick.length === (arrayNumbers.length - arrayBombs.length)) {
+                end = true;
+
+                // loop
+                for(let i = 0; i < arrayNumbers.length; i++){
+                    if(arrayBombs.includes(parseInt(boxList[i].textContent))) {
+                        boxList[i].classList.add("bomb");
+                    }
+                }
+    
+                verdict.textContent = `Congratulation... You won, bye!!!!`;
+                verdict.classList.remove("hidden");
+            }
+
+        } else {
+
+            // loop
+            for(let i = 0; i < arrayNumbers.length; i++) {
+                if(arrayBombs.includes(parseInt(boxList[i].textContent))) {
+                    boxList[i].classList.add("bomb");
+                }
+            }
+
+            end = true;
+
+            verdict.textContent = "You lost... I am sorry, bye...";
+            verdict.classList.remove("hidden");
+        }              
     }
+}
+
+function generateGrid() {
+    
+    // variables
+    const userDifficulty = document.getElementById("difficulties");
+    const mainTitle = document.getElementById("main-title");
+    const gridSquare = document.querySelector(".grid");
+
+    verdict.textContent = "";
+    verdict.classList.add("hidden");
+    gridSquare.innerHTML = "";
+    end = false;
+    userClick = [];
+    
+    const userChoise = parseInt(userDifficulty.value);
+
+    arrayNumbers = generatorNumsArray(userChoise);
+    arrayBombs = randomNumbersArrayGenerator(16, userChoise);
+
+    // loop
+    for(let i = 0; i < arrayNumbers.length ; i++){
+        const item = boxGenerator();
+
+        if(userChoise === 49){
+            item.classList.add("hard");
+
+        } else if(userChoise === 81){
+            item.classList.add("medium");
+
+        } else {
+            item.classList.add("easy");
+        }
+
+        item.innerHTML = arrayNumbers[i];
+        item.addEventListener("click", squareHandlerClick);
+        gridSquare.append(item);
+        mainTitle.classList.add("hidden");
+        gridSquare.classList.remove("hidden");
+    }
+}
